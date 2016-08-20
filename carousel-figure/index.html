@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--运动的第一步，先用script标签把js运动库引进来-->
+    <script src="mTween.js"></script>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+        #box{
+            margin: 30px auto;
+            width: 500px;
+            height: 460px;
+            border: 5px solid #9c949c;
+            padding: 2px;
+            cursor: pointer;
+            overflow: hidden;
+        }
+        #list{
+            width: 2500px;
+            height: 460px;
+            position: relative;
+            top: 0;
+            right: 0;
+        }
+        #list li{
+            float:left;
+            position: relative;
+        }
+        #list li img{
+            width: 500px;
+            height: 460px;
+        }
+        
+    </style>
+    <script src="js/mTween.js"></script>
+</head>
+<body>
+    <div id="box">
+        <ul id="list">
+            <li><img src="img/pic.png"/></li>
+            <li><img src="img/pic1.png"/></li>
+            <li><img src="img/pic2.png"/></li>
+            <li><img src="img/pic3.png"/></li>    
+            <li><img src="img/pic4.png"/></li>
+        </ul>
+    </div>
+<script>
+    /*
+    * 运动的第一步，先用script标签把js运动库引进来
+    * 让图片进行切换
+    *
+    *   运动函数（ 变量，         对象，                   数字，   字符串，   函数）
+    *   mTween(运动的对象，对象的属性名和属性值（键值对），运动时间，运动方式，回调函数);
+    * */
+    //判断当宽度达到500px时，清除之后，设置延迟定时器，再进行图片循环
+    var list = document.getElementById('list');
+    var lis = list.getElementsByTagName('li');
+    var n=0;
+
+    list.style.left = n; //图片加载初始化
+    var oLeft = parseInt(getComputedStyle(lis[0]).width);  
+
+    //无缝滚动，复制ul,当图片到达最后一张的时候，让ul的left值瞬间等于0，连接到第一张图片，实现连续滚动
+    list.innerHTML += list.innerHTML;
+    list.style.width = oLeft*lis.length+ 'px';
+
+    //添加定时器
+    setInterval(function(){
+        n++;
+        mTween(list,{'left':-n*oLeft},500,'linear',function(){
+            //判断n的值如果等于lis的长度，就让n的值变为0，跳到第一张图片
+            if(n == lis.length/2){
+                list.style.left = 0;
+                n = 0;
+            }
+        },1000);
+    },2000);
+</script>
+</body>
+</html>
