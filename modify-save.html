@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		*{
+			padding:0;
+			margin:0;
+		}
+		#edit{
+			width:560px;
+			border:1px solid #B0B0F5;
+			margin:50px auto;
+		}
+		#edit dt{
+			height:30px;
+			line-height:30px;
+			font-size:20px;
+			background:#5a94ef;
+			color:#fff;
+			text-indent: 20px;
+		}
+		#edit dd{
+			height:40px;
+			line-height:40px;
+			padding-left:20px;
+			border-bottom: 1px solid #B0B0F5;
+		}
+		#edit dd input{
+			height:25px;
+			line-height:25px;
+			position:relative;
+			top:-2px;
+			display: none;
+		}
+		#edit dd a{
+			width:50px;
+			height:24px;
+			line-height:24px;
+			text-align:center;
+			background:#50A0E6;
+			color:#fff;
+			text-decoration:none;
+			display:inline-block;
+		}
+		#edit dd a:nth-of-type(n+2){
+			display: none;
+		}
+		#edit dd.active a:nth-of-type(n+2){
+			display:inline-block;
+		}
+		#edit dd.active input{
+			display:inline-block;
+		}
+		#edit dd.active span{
+			display: none;
+		}
+		#edit dd.active a:nth-of-type(1){
+			display:none;
+		}
+	</style>
+</head>
+<body>
+	<dl id="edit">	
+		<dt>分类名称</dt>
+		<dd>
+			<span>Hello，welcome!!!</span>
+			<input type="text" name=""/>
+			<a href="javascript:;">修改</a>
+			<a href="javascript:;">保存</a>
+			<a href="javascript:;">取消</a>
+		</dd>
+		<dd>
+			<span>Hello，welcome!!!</span>
+			<input type="text" name=""/>
+			<a href="javascript:;">修改</a>
+			<a href="javascript:;">保存</a>
+			<a href="javascript:;">取消</a>
+		</dd>
+		<dd>
+			<span>Hello，welcome!!!</span>
+			<input type="text" name=""/>
+			<a href="javascript:;">修改</a>
+			<a href="javascript:;">保存</a>
+			<a href="javascript:;">取消</a>
+		</dd>
+		<dd>
+			<span>Hello，welcome!!!</span>
+			<input type="text" name=""/>
+			<a href="javascript:;">修改</a>
+			<a href="javascript:;">保存</a>
+			<a href="javascript:;">取消</a>
+		</dd>
+		<dd>
+			<span>Hello，welcome!!!</span>
+			<input type="text" name=""/>
+			<a href="javascript:;">修改</a>
+			<a href="javascript:;">保存</a>
+			<a href="javascript:;">取消</a>
+		</dd>
+		<dd>
+			<span>Hello，welcome!!!</span>
+			<input type="text" name=""/>
+			<a href="javascript:;">修改</a>
+			<a href="javascript:;">保存</a>
+			<a href="javascript:;">取消</a>
+		</dd>
+	</dl>
+	<script type="text/javascript">
+		var edit = document.getElementById('edit');
+		var dds = edit.getElementsByTagName('dd');
+
+		for(var i=0;i<dds.length;i++){
+			editFn(i);
+		}
+		
+		function editFn(n){
+			var span = dds[n].getElementsByTagName('span')[0];
+			var input = dds[n].getElementsByTagName('input')[0];
+			var as = dds[n].getElementsByTagName('a');
+
+			//点击修改按钮
+			as[0].onclick = function(){
+				//清空所有的class
+				for(var i=0;i<dds.length;i++){
+					dds[i].className = '';
+				}
+				dds[n].className = 'active';
+				input.value = span.innerHTML;
+			};
+			//点击保存按钮
+			as[1].onclick = function(){
+				dds[n].className = '';
+				span.innerHTML = input.value;
+			};
+			//点击取消按钮
+			as[2].onclick = function(){
+				dds[n].className = '';
+			};
+		}
+
+	</script>
+</body>
+</html>
