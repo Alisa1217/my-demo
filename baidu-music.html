@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		*{
+			padding:0;
+			margin:0;
+		}
+
+		#wrap{
+			margin:30px auto;
+			width:350px;
+			border:1px solid #ddd;
+			font-size:16px;
+		}
+		#list{
+			width:100%;
+		}
+		li{
+			list-style:none;
+			width:100%;
+			height:40px;
+			background:#fff;
+			line-height: 40px;
+		}
+		li:hover{
+			background: #D7BEE2;
+			border-bottom:1px solid #fff;
+		}
+		input{
+			margin-left:20px;
+		}
+		#list span{
+			display: inline-block;
+            width: 200px;
+		}
+		b{
+            font-weight: normal;
+		}
+		.color1 {
+            background: #e4fbfb;
+        }
+        .color2 {
+            background: #F3B7CD;
+        }
+        #select{
+        	height:40px;
+        	line-height:40px;
+        	border-top:1px solid #ddd;
+        }
+	</style>
+</head>
+<body>
+	<div id="wrap">
+		<ul id="list">
+			<li>
+	            <input type="checkbox"/>
+	            <span>私奔</span>
+	            <b>梁博</b>
+	        </li>
+	        <li>
+	            <input type="checkbox"/>
+	            <span>北京北京</span>
+	            <b>梁博</b>
+	        </li>
+	        <li>
+	            <input type="checkbox"/>
+	            <span>我爱你中国</span>
+	            <b>梁博</b>
+	        </li>
+	        <li>
+	            <input type="checkbox"/>
+	            <span>回来</span>
+	            <b>梁博</b>
+	        </li>
+	        <li>
+	            <input type="checkbox"/>
+	            <span>花火</span>
+	            <b>梁博</b>
+	        </li>
+	        <li>
+	            <input type="checkbox"/>
+	            <span>爱要有你才完美</span>
+	            <b>梁博,那英</b>
+	        </li>
+		</ul>
+		<div id="select">
+	        <input type="checkbox"/>
+	        <span>全选</span>
+	        <input type="button" value="收藏"/>
+	        <input type="button" value="添加"/>
+	        <input type="button" value="删除"/>
+	    </div>
+	</div>
+	<script type="text/javascript">
+		var list = document.getElementById('list');
+		var lis = list.getElementsByTagName('li');
+		var checks = list.getElementsByTagName('input');
+		var selectAll = document.querySelector('#select input');
+		var num=0; //点击次数
+		//隔行显示背景 
+		for(var i=0;i<lis.length;i++){
+			if(i%2 == 0){
+				lis[i].className = 'color1'; //0 2 4...  背景为蓝色
+				lis[i].bg = 'color1'; //存一个自定义背景，在点击复选框时使用
+			}else{
+				lis.className = '';  //1 3 5...背景为白色
+				lis[i].bg = ''; //存一个自定义背景，在点击复选框时使用
+			}
+		}
+		//单选
+		for(var i=0;i<lis.length;i++){
+			lis[i].index = i;
+			checks[i].index = i;
+			checks[i].onclick = function(){
+				//如果为checked，背景改变
+				if(this.checked){
+					num++;
+					lis[this.index].className = 'color2';
+				}else{
+					num--;
+					lis[this.index].className = lis[this.index].bg; //这样原背景就不会被去掉
+				}
+				//判断单选/全选
+				if(num == lis.length){
+					selectAll.checked = true;
+				}else{
+					selectAll.checked = false;
+				}
+			};
+		}
+  		
+		//全选
+       	selectAll.onclick = function(){
+       		for(var i=0;i<checks.length;i++){
+	       		//判断如果是全选，则设置相应的背景，num等于checks的长度
+	       		if(this.checked == true){
+	       				checks[i].checked = true;
+	       				lis[i].className = 'color2';
+	       				num = checks.length; 
+	       		}else{
+	       			//再点击取消全选，则改变状态，还原背景，num等于0
+	       				checks[i].checked = false;
+	       				lis[i].className = lis[i].bg;
+	       				num = 0;
+	       		}
+	       	}
+       	};
+	</script>
+</body>
+</html>
