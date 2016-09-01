@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<ul id="list">
+	    <li>
+	        <input type="button" value="-"/>
+	        <strong>0</strong>
+	        <input type="button" value="+"/>
+	        单价：<em>12.5元</em>
+	        小计：<span>0</span>元
+	    </li>
+	    <li>
+	        <input type="button" value="-"/>
+	        <strong>0</strong>
+	        <input type="button" value="+"/>
+	        单价：<em>10.5元</em>
+	        小计：<span>0</span>元
+	    </li>
+	    <li>
+	        <input type="button" value="-"/>
+	        <strong>0</strong>
+	        <input type="button" value="+"/>
+	        单价：<em>8.5元</em>
+	        小计：<span>0</span>元
+	    </li>
+	    <li>
+	        <input type="button" value="-"/>
+	        <strong>0</strong>
+	        <input type="button" value="+"/>
+	        单价：<em>8元</em>
+	        小计：<span>0</span>元
+	    </li>
+	    <li>
+	        <input type="button" value="-"/>
+	        <strong>0</strong>
+	        <input type="button" value="+"/>
+	        单价：<em>14.5元</em>
+	        小计：<span>0</span>元
+	    </li>
+	</ul>
+	<p id="count">
+	    商品合计共：<span >0</span>件，共花费了：<span>0</span>元<br>
+	    其中最贵的商品单价是：<span>0</span>元
+	</p>
+	<script type="text/javascript">
+		var list = document.getElementById('list');
+		var lis = list.getElementsByTagName('li');
+
+		for(var i=0;i<lis.length;i++){
+			count(lis[i]);
+		}
+
+		function count(li){
+			var btns = li.querySelectorAll('input');
+			var strong = li.querySelector('strong');
+			var em = li.getElementsByTagName('em')[0];
+			var span = li.getElementsByTagName('span')[0];
+			var n = strong.innerHTML;	
+			var price = parseFloat(em.innerHTML);
+			//点击减按钮
+			btns[0].onclick = function(){
+				if(n > 0){
+					n--;
+				}
+				strong.innerHTML = n;
+				span.innerHTML = n*price;
+				sum();
+			};
+			//点击加按钮
+			btns[1].onclick = function(){
+				n++;
+				strong.innerHTML = n;
+				span.innerHTML = n*price;
+				sum();
+			};
+		}
+
+		function sum(){
+			var num = 0;  //商品数
+			var total = 0; //总价格
+			var max = 0; //最高价格
+
+			for(var i=0;i<lis.length;i++){
+				var str = lis[i].querySelector('strong');
+				var es = lis[i].querySelector('em');
+				var totals = list.getElementsByTagName('span');
+				var count = document.getElementById('count');
+				var spans = count.querySelectorAll('span');
+
+				num += parseInt(str.innerHTML);
+				total += parseFloat(totals[i].innerHTML);
+				
+				//先判断商品数量大于0
+				if(parseInt(str.innerHTML)){
+					//再进行价格对比
+					if(max < parseFloat(es.innerHTML)){
+						max = parseFloat(es.innerHTML);
+					}
+				}
+			}
+			spans[0].innerHTML = num;
+			spans[1].innerHTML = total;
+			spans[2].innerHTML = max;
+		}
+	</script>
+</body>
+</html>
