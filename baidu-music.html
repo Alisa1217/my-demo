@@ -137,14 +137,14 @@
        			for(var i=0;i<checks.length;i++){
 		       		//判断如果是全选，则设置相应的背景，num等于checks的长度
 		       		if(this.checked == true){
-		       				checks[i].checked = true;
-		       				lis[i].className = 'color2';
-		       				num = checks.length; 
+		       			checks[i].checked = true;
+		       			lis[i].className = 'color2';
+		       			num = checks.length; 
 		       		}else{
 		       			//再点击取消全选，则改变状态，还原背景，num等于0
-		       				checks[i].checked = false;
-		       				lis[i].className = lis[i].bg;
-		       				num = 0;
+		       			checks[i].checked = false;
+		       			lis[i].className = lis[i].bg;
+		       			num = 0;
 		       		}
 	       		}
        		};
