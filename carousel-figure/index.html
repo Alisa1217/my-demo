@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>轮播图</title>
     <!--运动的第一步，先用script标签把js运动库引进来-->
     <script src="mTween.js"></script>
     <style>
@@ -60,7 +60,7 @@
     //判断当宽度达到500px时，清除之后，设置延迟定时器，再进行图片循环
     var list = document.getElementById('list');
     var lis = list.getElementsByTagName('li');
-    var n=0;
+    var n=0; //图片数初始化
 
     list.style.left = n; //图片加载初始化
     var oLeft = parseInt(getComputedStyle(lis[0]).width);  
